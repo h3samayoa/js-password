@@ -54,6 +54,15 @@ let generatePassword = (
   if (includeSymbols) charCodes = charCodes.concat(SYMBOL_CODES);
   if (includeNumbers) charCodes = charCodes.concat(NUMBER_CODES);
   if (includeLowercase) charCodes = charCodes.concat(LOWERCASE_CODES);
+  var textInputs = document.querySelectorAll('input[type=checkbox]');
+  var empty = [].filter.call(textInputs, function ( el ) {
+    return !el.checked
+  })
+
+  if (textInputs.length == empty.length) {
+    var errMsg = "Please select a checkbox!"
+    return errMsg;
+  }
   const passwordChar = [];
   for (let i = 0; i < charAmount; i++) {
     const charCode = 
@@ -74,12 +83,13 @@ function arrayFromLowToHigh(low, high) {
 //modal variables
 
 var modal = document.getElementById("myModal");
-var btn = document.getElementById("myBtn");
 var span = document.getElementsByClassName("close")[0];
 
 //when modal button is clicked display modal
-btn.onclick = function() {
-  modal.style.display = "block";
+document.getElementById("mybtn").addEventListener("click", toggleModal);
+
+function toggleModal() {
+  return modal.style.display = "block"
 }
 
 //when the close button is clicked close the modal
